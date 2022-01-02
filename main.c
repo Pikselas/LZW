@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include"LZW.h"
-
 int main()
 {
     LZW_table tab = Construct_Table(20, 400);

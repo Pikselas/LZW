@@ -21,7 +21,7 @@ typedef struct
     unsigned int * STREAM;
     unsigned int MAX_SIZE;
     unsigned int STREAM_SIZE;
-} LZW_ENCODED_STREAM , LZW_DECODED_STREAM;
+} LZW_ENCODED_STREAM;
 /*
     Creates a string table with given size;
 */
@@ -31,7 +31,7 @@ LZW_table Construct_Table(const int string_size , const int table_size)
     table.STRING_SIZE = string_size;
     table.TABLE_SIZE = table_size;
     table.Counter = -1;
-    table.TABLE = malloc(sizeof(char) * string_size * table_size);
+    table.TABLE = (unsigned char *)malloc(sizeof(unsigned char) * string_size * table_size);
     return table;
 }
 /*
@@ -85,7 +85,7 @@ int PushTo_table(LZW_table * const table , const char * const str , const int st
             return 0;
         }
     }
-    char* ptr = table->TABLE + (table->STRING_SIZE * table->Counter);
+    unsigned char* ptr = table->TABLE + (table->STRING_SIZE * table->Counter);
     memcpy( ptr , str , str_size);
     memset(ptr + str_size , 0 , table->STRING_SIZE - str_size);
     return 1;
